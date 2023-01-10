@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <body>
-    <h2>JavaScript Geolocation</h2>
-
-    <p>Click the button to get your coordinates.</p>
-
-    <button onclick="getLocation()">Try It</button>
-
-    <p id="demo"></p>
-
-    <script>
-      const x = document.getElementById("demo");
-
-      function getLocation() {
-        try {
-          navigator.geolocation.getCurrentPosition(showPosition);
-        } catch {
-          x.innerHTML = err;
-        }
+<head>
+  <title>My Map</title>
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else { 
+        alert("Geolocation is not supported by this browser.");
       }
+    }
 
-      function showPosition(position) {
-        x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
-      }
-    </script>
-  </body>
+    function showPosition(position) {
+      var lat = position.coords.latitude;
+      var lon = position.coords.longitude;
+      var url = "https://maps.google.com/?q=" + lat + "," + lon;
+      window.open(url);
+    }
+  </script>
+</head>
+<body>
+    <p>Pencet tombol dan izinkan browser mengambil koordinat.</p>
+    <button onclick="getLocation()">Pencet disini!</button> 
+</body>
 </html>
